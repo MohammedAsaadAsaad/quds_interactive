@@ -1,7 +1,8 @@
 name: quds_interactive
 description: An easy localization (with customizing), with dynamic theme!
-version: 0.0.1
-homepage:
+version: 0.0.1-beta
+homepage: https://www.alrazysoft.com
+repository: https://github.com/MohammedAsaadAsaad/quds_interactive
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

@@ -104,6 +104,9 @@ var englishSupport = {
      };
 ```
 
+![](https://github.com/MohammedAsaadAsaad/quds_interactive/blob/master/screenshots/1.png?raw=true)
+![](https://github.com/MohammedAsaadAsaad/quds_interactive/blob/master/screenshots/2.png?raw=true)
+
 
 ### How to change the selected language and theme?
 By default the default language will be the device language, and the brightness will have the default device option.
@@ -133,3 +136,6 @@ The package provides simple ui to change the current language and theme:
 ```
 
 
+![](https://github.com/MohammedAsaadAsaad/quds_interactive/blob/master/screenshots/3.png?raw=true)
+
+![](https://github.com/MohammedAsaadAsaad/quds_interactive/blob/master/screenshots/4.PNG?raw=true)
