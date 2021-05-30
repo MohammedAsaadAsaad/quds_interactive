@@ -1,0 +1,23 @@
+name: quds_interactive
+description: An easy localization (with customizing), with dynamic theme!
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  quds_ui_kit: ^0.0.4+5
+  quds_provider: ^0.0.5+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+# Assets
+flutter:
+  assets:
+    - assets/flags/ 
