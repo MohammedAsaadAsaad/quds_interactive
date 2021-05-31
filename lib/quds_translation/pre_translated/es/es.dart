@@ -132,13 +132,13 @@ class _EsESLanguageDetails extends QudsLanguageDetails {
         'Saturday': 'Sábado',
         'Sunday': 'Domingo',
         //Abbreviated days (1-2 letters)
-        'Sun_day_abb_1': 'Do',
         'Mon_day_abb_1': 'Lu',
         'Tue_day_abb_1': 'Ma',
         'Wed_day_abb_1': 'Mi',
         'Thu_day_abb_1': 'Ju',
         'Fri_day_abb_1': 'Vi',
         'Sat_day_abb_1': 'Sá',
+        'Sun_day_abb_1': 'Do',
         //Abbreviated days (3 letters)
         'Mon': 'Lun',
         'Tue': 'Mar',

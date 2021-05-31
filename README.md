@@ -97,9 +97,9 @@ By default the default language will be the device language, and the brightness 
 To change the translation:
 ```
 QudsTranslation.setLanguage('en', onChanged:(){
-
+// To save the lang
+// QudsInteractiveApp.appController.saveStateInSharedPreferences();
 });
-
 ```
 
 To toggle the theme:
@@ -111,12 +111,10 @@ The package provides simple ui to change the current language and theme:
 
 ```
     // To change the translation
-    QudsTranslation.showLanguagesSelectionBorderSheet(context,
-        onChanged: () {});
+    QudsTranslation.showLanguagesSelectionBorderSheet(context);
 
     // To change the theme
-    QudsTheme.showThemesSelectionBorderSheet(context,
-        onChanged: () {});
+    QudsTheme.showThemesSelectionBorderSheet(context);
 ```
 
 

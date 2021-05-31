@@ -17,3 +17,8 @@
 * Re-wrote README.md content
 * Added Spain support
 
+
+
+## 0.0.2+1
+* Re-wrote README.md content
+
