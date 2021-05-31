@@ -11,7 +11,7 @@ class _EsESLanguageDetails extends QudsLanguageDetails {
   String get langCode => 'es';
 
   @override
-  TextDirection get textDirection => TextDirection.rtl;
+  TextDirection get textDirection => TextDirection.ltr;
 
   @override
   String get langName => 'Spanish';
@@ -140,13 +140,13 @@ class _EsESLanguageDetails extends QudsLanguageDetails {
         'Fri_day_abb_1': 'Vi',
         'Sat_day_abb_1': 'Sá',
         //Abbreviated days (3 letters)
-        'Mon': 'اثن',
-        'Tue': 'ثلا',
-        'Wed': 'أرب',
-        'Thu': 'خمس',
-        'Fri': 'جمع',
-        'Sat': 'سبت',
-        'Sun': 'أحد',
+        'Mon': 'Lun',
+        'Tue': 'Mar',
+        'Wed': 'Mié',
+        'Thu': 'Jue',
+        'Fri': 'Vie',
+        'Sat': 'Sáb',
+        'Sun': 'Dom',
         //....
         'No characters remaining': 'No quedan caracteres',
         '1 character remaining': 'Falta 1 caracter',
