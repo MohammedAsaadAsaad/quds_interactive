@@ -11,14 +11,11 @@ This library introduce  a simple way to control those factors with saving, resto
 ## How to use?
 ### Initializing:
 ```
-void main(){
-     WidgetsFlutterBinding.ensureInitialized(); // <- Important to work.
+void main() async{
+  
+   await QudsInteractiveApp.initialize(
+      supportedLanguageCodes: ['en', 'ar_ps', 'fr'],);
 
-     // To initialize the translator
-     QudsTranslation.initialize(['en_us', 'ar'],);
-
-     // To initilize the themer
-     QudsTheme.initialize();
 
      // Then run your app
      runApp(MyApp());
@@ -26,37 +23,23 @@ void main(){
 }
 ```
 
-### Use QudsAppController 
-<b>To save and restore preferences</b>
-```
-QudsAppController appController = QudsAppController(
-  providers: [QudsTranslation.provider, QudsTheme.provider],
-);
-```
 
 ### Wrapping the app in QudsInteractiveApp
 ```
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return QudsApp(
-        controller: appController,
-        child: QudsInteractiveApp(
+    return QudsInteractiveApp(
           builder: (c) => MyHomePage(title: 'Test Translation'.tr),
-        ));
+        );
   }
 }
 ```
 
-* QudsApp 
-used to pass providers [QudsTranslation.provider, QudsTheme.provider] to the app.
-<br/>
 
 * QudsInteractiveApp
 used to apply the changes to the app.
 
-
-<br>
 <br>
 
 * To Translate
@@ -83,8 +66,9 @@ class CustomWidget extends StatelessWidget {
 ### How to support additional translations?
 In initializing, you can add more specific translations,
 ```
-     // To initialize the translator
-     QudsTranslation.initialize(['en_us', 'ar'], additionalDictionaries: {'ar': arabicSupport, 'en': englishSupport});
+      await QudsInteractiveApp.initialize(
+      supportedLanguageCodes: ['en', 'ar_ps', 'fr'],
+      additionalDictionaries: {'ar': arabicSupport, 'en': englishSupport});
 ```
 
 ar.dart
