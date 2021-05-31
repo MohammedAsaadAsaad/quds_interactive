@@ -1,6 +1,6 @@
-part of '../pre_translated.dart';
+part of '../../internals.dart';
 
-class FrFrLanguageDetails extends QudsLanguageDetails {
+class _FrFrLanguageDetails extends QudsLanguageDetails {
   @override
   String get abbreviatedName => 'Fr';
 
@@ -22,7 +22,7 @@ class FrFrLanguageDetails extends QudsLanguageDetails {
   @override
   Map<String, String> get dictionary => {
         'Back': 'Dos',
-        'Sauvegarder': 'حفظ',
+        'Save': 'Sauvegarder',
         'Current Language': 'Langue courante',
         'Change Language': 'Changer de langue',
         'Select language': 'Choisir la langue',

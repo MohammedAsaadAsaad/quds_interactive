@@ -9,9 +9,6 @@ import 'package:quds_provider/quds_provider.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 import '../quds_interactive.dart';
 
-//Exports
-export 'pre_translated/pre_translated.dart';
-
 part 'quds_language.dart';
 part 'quds_language_details.dart';
 
@@ -24,3 +21,8 @@ part 'quds_translation_provider.dart';
 part 'quds_translation.dart';
 
 part 'material_localizations.dart';
+
+//Pre translations
+part 'pre_translated/ar/ps.dart';
+part 'pre_translated/en/us.dart';
+part 'pre_translated/fr/fr.dart';

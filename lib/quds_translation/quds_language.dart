@@ -4,14 +4,28 @@ class QudsLanguage {
   _MaterialLocalizationsDelegate get materialLocalizationsDelegate =>
       const _MaterialLocalizationsDelegate();
 
+  /// The language code like 'ar'
   String? langCode;
+
+  /// The language name like 'العربية'
   String? langName;
+
+  /// The abbreviated name of the language like 'ع'
   String? abbreviatedName;
+
+  /// The text direction of the language
   TextDirection? textDirection;
+
+  /// The desired font family of the language
   String? prefferedFont;
+
+  /// The country code like 'PS'
   String? countryCode;
+
+  /// The country name like 'فلسطين'
   String? countryName;
 
+  /// The dicionary of the co-words of this language
   Map<String, String> dictionary = {};
 
   String translate(String key) {
@@ -24,6 +38,8 @@ class QudsLanguage {
     return result ?? key;
   }
 
+  /// Create an instance of [QudsLanguage]
+  /// using an instance of [QudsLanguageDetails]
   QudsLanguage.fromLanguageDetails(QudsLanguageDetails details) {
     langCode = details.langCode;
     langName = details.langName;
@@ -40,6 +56,7 @@ class QudsLanguage {
       dictionary[entry.key.toLowerCase().trim()] = entry.value;
   }
 
+  /// Merge another dictionary with the current dictionary
   void mergeDictionary(Map<String, String> map) {
     for (var entry in map.entries)
       dictionary[entry.key.toLowerCase().trim()] = entry.value;

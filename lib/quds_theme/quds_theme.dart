@@ -1,5 +1,6 @@
 part of 'internals.dart';
 
+/// Control the theme of the app
 class QudsTheme {
   static bool _initialized = false;
   static void _initializeUpdater() {
@@ -16,9 +17,13 @@ class QudsTheme {
     provider.addWatcher(updateOnChange);
   }
 
+  /// Customize the dark theme of the app
   static ThemeData darkTheme = ThemeData.dark();
+
+  /// Customize the light theme of the app
   static ThemeData lightTheme = ThemeData.light();
 
+  /// Initialize the theme control of the app
   static void initialize(
       {ThemeData? lightThemeData, ThemeData? darkThemeData}) {
     if (_initialized) return;
@@ -30,18 +35,29 @@ class QudsTheme {
     _initializeUpdater();
   }
 
+  /// An instance of the QudsThemeProvider class to control the theme of the app
   static QudsThemeProvider provider = QudsThemeProvider();
+
+  /// Toggle the two themes (light & dark) of the app
   static void toggleTheme({VoidCallback? onChanged}) {
     provider.isDark.v = !provider.isDark.v;
     onChanged?.call();
   }
 
+  /// Show a bottom sheet with ability to change the app theme
+  /// `onChanged` A callback function that fired when the app theme is changed
+  /// Usually used to save the new theme preferences
   static void showThemesSelectionBorderSheet(BuildContext context,
-      {VoidCallback? onChanged}) {
+      {bool autoSave = true, VoidCallback? onChanged}) {
     showQudsModalBorderSheet(
       context,
       (c) => QudsThemesListView(
-        onChanged: onChanged,
+        onChanged: () async {
+          if (autoSave)
+            await QudsInteractiveApp.qudsAppController
+                .saveStateInSharedPreferences();
+          onChanged?.call();
+        },
       ),
       title: QudsProviderWatcher<QudsThemeProvider>(
           builder: (p) => Padding(

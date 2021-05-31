@@ -2,32 +2,25 @@ import 'package:example/translations/en.dart';
 import 'package:example/ui/main_app_lang.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_interactive/quds_interactive.dart';
-import 'package:quds_provider/quds_provider.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 import 'translations/ar.dart';
 import 'ui/translated_as_required.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await appController.restoreStateInSharedPreferences();
-  QudsTranslation.initialize(['en_us', 'ar', 'en', 'fr'],
+  await QudsInteractiveApp.initialize(
+      supportedLanguageCodes: ['en', 'ar_ps', 'fr'],
       additionalDictionaries: {'ar': arabicSupport, 'en': englishSupport});
-  QudsTheme.initialize();
+
   runApp(MyApp());
 }
-
-QudsAppController appController = QudsAppController(
-  providers: [QudsTranslation.provider, QudsTheme.provider],
-);
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return QudsApp(
-        controller: appController,
-        child: QudsInteractiveApp(
-          builder: (c) => MyHomePage(title: 'Test Translation'.tr),
-        ));
+    return QudsInteractiveApp(
+      debugShowCheckedModeBanner: false,
+      builder: (c) => MyHomePage(title: 'Test Translation'.tr),
+    );
   }
 }
 
@@ -91,8 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
         FloatingActionButton(
           heroTag: 'btn1',
           onPressed: () => QudsTranslation.showLanguagesSelectionBorderSheet(
-              context,
-              onChanged: () => appController.saveStateInSharedPreferences()),
+            context,
+          ),
           tooltip: 'Change Language'.tr,
           child: Icon(Icons.language),
         ),
@@ -101,8 +94,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         FloatingActionButton(
           heroTag: 'btn2',
-          onPressed: () => QudsTheme.showThemesSelectionBorderSheet(context,
-              onChanged: () => appController.saveStateInSharedPreferences()),
+          onPressed: () => QudsTheme.showThemesSelectionBorderSheet(
+            context,
+          ),
           tooltip: 'Toggle Theme'.tr,
           child: QudsAnimatedCombinedIcons(
             startIcon: Icons.brightness_5_outlined,

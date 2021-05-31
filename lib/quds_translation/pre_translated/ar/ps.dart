@@ -1,6 +1,6 @@
-part of '../pre_translated.dart';
+part of '../../internals.dart';
 
-class ArPSLanguageDetails extends QudsLanguageDetails {
+class _ArPSLanguageDetails extends QudsLanguageDetails {
   @override
   String get abbreviatedName => 'ع';
 

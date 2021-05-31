@@ -1,6 +1,8 @@
 part of 'internals.dart';
 
+/// A list view with the current languages list
 class QudsLanguagesListView extends StatefulWidget {
+  /// A callback that called if a change of app theme preferences occured
   final VoidCallback? onChanged;
 
   const QudsLanguagesListView({Key? key, this.onChanged}) : super(key: key);
@@ -47,8 +49,10 @@ class _LanguagesListViewState extends State<QudsLanguagesListView>
                               duration: const Duration(milliseconds: 200),
                               xOffset: 0.1,
                               child: ListTile(
-                                  onTap: () =>
-                                      QudsTranslation.setLanguage(l.toString()),
+                                  onTap: () {
+                                    QudsTranslation.setLanguage(l.toString());
+                                    widget.onChanged?.call();
+                                  },
                                   leading: Container(
                                       width: 40,
                                       alignment: Alignment.center,
@@ -87,6 +91,7 @@ class _LanguagesListViewState extends State<QudsLanguagesListView>
           autofocus: true,
           style: const TextStyle(height: 1),
           decoration: InputDecoration(
+              hintText: 'Search'.tr,
               // contentPadding: EdgeInsets.all(0),
               prefixIcon: Container(
                   width: 30,

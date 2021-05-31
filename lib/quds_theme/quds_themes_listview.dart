@@ -1,8 +1,11 @@
 part of 'internals.dart';
 
+/// A list view with theme options
 class QudsThemesListView extends StatefulWidget {
+  /// A callback that called if a change of app theme preferences occured
   final VoidCallback? onChanged;
 
+  /// Create an instance of [QudsThemesListView]
   const QudsThemesListView({Key? key, this.onChanged}) : super(key: key);
 
   @override

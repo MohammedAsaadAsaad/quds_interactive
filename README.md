@@ -1,7 +1,7 @@
-# Quds Interactive App
+# Quds Interactive
 An easy localization (with customizing), with dynamic theme!
 
-## Why Quds Interactive App?
+## Why Quds Interactive?
 Every app today should considers two factors:
 * User language.
 * Device brightness mode.

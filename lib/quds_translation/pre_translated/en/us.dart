@@ -1,6 +1,6 @@
-part of '../pre_translated.dart';
+part of '../../internals.dart';
 
-class EnUSLanguageDetails extends QudsLanguageDetails {
+class _EnUSLanguageDetails extends QudsLanguageDetails {
   @override
   String get abbreviatedName => 'En';
 

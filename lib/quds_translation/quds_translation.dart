@@ -1,11 +1,25 @@
 part of 'internals.dart';
 
+/// Control the language of the app
 class QudsTranslation {
-  static QudsLanguage? currLanguage;
+  static QudsLanguage? _currLanguage;
+
+  /// The current language of the app
+  static QudsLanguage? get currLanguage => _currLanguage;
+
   static bool _initialized = false;
+
+  /// The supported languages map in the app
   static Map<String, QudsLanguage> languages = {};
+
+  /// An instance of [QudsTranslationProvider] to control the language and
+  /// notify if changed
   static QudsTranslationProvider provider = QudsTranslationProvider();
-  static String? deviceLocaleCode;
+
+  static String? _deviceLocaleCode;
+
+  /// The current device locale code
+  static String? get deviceLocaleCode => _deviceLocaleCode;
 
   static void _initializeDeviceLocaleCodeUpdater() {
     var platInstance = SchedulerBinding.instance!.window;
@@ -20,11 +34,19 @@ class QudsTranslation {
     provider.addWatcher(updateOnChange);
   }
 
+  /// Get the device local code first part,
+  /// As example 'en' =>'en'
+  /// 'en_US' => 'en'
   static String getDeviceLocaleCode() {
     var result = Platform.localeName;
     return result.split('_')[0]; //en_us -- return just en
   }
 
+  /// Initialize the translation service
+  /// `supportedLanguageCodes`: the desired languages of the app
+  /// as example `['ar', 'en_US']`
+  /// 'additionalDictionaries': Supporting dictionaries for not translated words
+  /// as example `['ar': {'hi_message':'أهلًا بك'}]`
   static void initialize(List<String> supportedLanguageCodes,
       {Map<String, Map<String, String>>? additionalDictionaries,
       String? defaultLangCode}) {
@@ -48,6 +70,7 @@ class QudsTranslation {
     _initializeDeviceLocaleCodeUpdater();
   }
 
+  /// Get the matching language
   static QudsLanguage? getLanguage(String? code) {
     if (code == null) return null;
 
@@ -69,6 +92,7 @@ class QudsTranslation {
       }
   }
 
+  /// Add a language to the languages list
   static void addLanguage(QudsLanguage lang) {
     if (!languages.containsKey(lang.toString()))
       languages[lang.toString()] = lang;
@@ -88,36 +112,36 @@ class QudsTranslation {
       case 'ar':
         switch (countryCode) {
           case 'PS':
-            result = ArPSLanguageDetails();
+            result = _ArPSLanguageDetails();
             break;
           default:
-            result = ArPSLanguageDetails();
+            result = _ArPSLanguageDetails();
             break;
         }
         break;
       case 'en':
         switch (countryCode) {
           case 'US':
-            result = EnUSLanguageDetails();
+            result = _EnUSLanguageDetails();
             break;
           default:
-            result = EnUSLanguageDetails();
+            result = _EnUSLanguageDetails();
             break;
         }
         break;
       case 'fr':
         switch (countryCode) {
           case 'FR':
-            result = FrFrLanguageDetails();
+            result = _FrFrLanguageDetails();
             break;
           default:
-            result = FrFrLanguageDetails();
+            result = _FrFrLanguageDetails();
             break;
         }
         break;
 
       default:
-        result = EnUSLanguageDetails();
+        result = _EnUSLanguageDetails();
         break;
     }
     String resultCode = result.toString();
@@ -126,15 +150,21 @@ class QudsTranslation {
     }
   }
 
+  /// Set the current language of the app
+  /// `code`: The language code, as example 'ar_PS'
+  /// `onChanged`: a callback fired when the set language changed
   static bool setLanguage(String code, {VoidCallback? onChanged}) {
     var lang = getLanguage(code.toLowerCase());
     if (lang == null) return false;
-    currLanguage = lang;
+    _currLanguage = lang;
     provider.langCode.v = lang.langCode;
     onChanged?.call();
     return true;
   }
 
+  /// Get the `key` corresponding translation, by default, it translate to the
+  /// current set language.
+  /// `langCode` if a specific language code desired
   static String translate(String key, {String? langCode}) {
     QudsLanguage? lang;
 
@@ -145,10 +175,11 @@ class QudsTranslation {
     return lang == null ? key : lang.translate(key);
   }
 
+  /// Apply the saved language
   static void setSavedLang({String? defaultLang}) async {
     if (defaultLang == null && provider.langCode.value == null) {
       var currentLocale = getDeviceLocaleCode();
-      deviceLocaleCode = currentLocale;
+      _deviceLocaleCode = currentLocale;
       defaultLang = currentLocale;
 
       //Check if the system language is embedded in this application,
@@ -161,12 +192,18 @@ class QudsTranslation {
     setLanguage(defaultLang ?? 'en');
   }
 
+  /// Show border modal sheet with translation options
   static void showLanguagesSelectionBorderSheet(BuildContext context,
-      {VoidCallback? onChanged}) {
+      {bool autoSave = true, VoidCallback? onChanged}) {
     showQudsModalBorderSheet(
       context,
       (c) => QudsLanguagesListView(
-        onChanged: onChanged,
+        onChanged: () async {
+          if (autoSave)
+            await QudsInteractiveApp.qudsAppController
+                .saveStateInSharedPreferences();
+          onChanged?.call();
+        },
       ),
       title: QudsProviderWatcher<QudsTranslationProvider>(
           builder: (p) => Padding(
@@ -177,9 +214,4 @@ class QudsTranslation {
               ))),
     );
   }
-}
-
-extension StringExtensions on String {
-  ///Translate
-  String get tr => translate(this);
 }

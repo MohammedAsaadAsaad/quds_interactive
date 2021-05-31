@@ -1,9 +1,14 @@
 part of 'internals.dart';
 
+/// A widget with Language injected in the [BuildContext] arg.
 class QudsTranslated extends StatelessWidget {
+  /// The child of this widget
   final Widget child;
+
+  /// The language code of the child
   final String? langCode;
 
+  /// Create an instance of [QudsTranslated]
   const QudsTranslated({Key? key, this.langCode, required this.child})
       : super(key: key);
 
@@ -20,6 +25,7 @@ class QudsTranslated extends StatelessWidget {
   QudsLanguage? get _lang =>
       QudsTranslation.getLanguage(langCode) ?? QudsTranslation.currLanguage;
 
+  /// Get the injected language in the [BuildContext] object
   static T of<T extends QudsLanguage>(BuildContext context) {
     var _inhLang =
         context.dependOnInheritedWidgetOfExactType<_InheritedLanguage>();

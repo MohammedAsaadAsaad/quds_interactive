@@ -4,3 +4,11 @@
 
 ## 0.0.1+1
 * Fixed some issues
+
+
+## 0.0.1+2
+* Fixed some issues
+
+
+## 0.0.1+3
+* Simplified app wrapping

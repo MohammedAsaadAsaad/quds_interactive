@@ -1,5 +1,6 @@
 part of 'internals.dart';
 
+/// A [ListTile] with ability to change the current language of the app
 class QudsSelectLanguageWidget extends StatelessWidget {
   final VoidCallback? onChanged;
 
