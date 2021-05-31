@@ -139,6 +139,16 @@ class QudsTranslation {
             break;
         }
         break;
+      case 'es':
+        switch (countryCode) {
+          case 'ES':
+            result = _EsESLanguageDetails();
+            break;
+          default:
+            result = _EsESLanguageDetails();
+            break;
+        }
+        break;
 
       default:
         result = _EnUSLanguageDetails();

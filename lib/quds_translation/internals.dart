@@ -26,3 +26,4 @@ part 'material_localizations.dart';
 part 'pre_translated/ar/ps.dart';
 part 'pre_translated/en/us.dart';
 part 'pre_translated/fr/fr.dart';
+part 'pre_translated/es/es.dart';

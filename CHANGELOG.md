@@ -15,3 +15,5 @@
 
 ## 0.0.2
 * Re-wrote README.md content
+* Added Spain support
+
