@@ -12,3 +12,6 @@
 
 ## 0.0.1+3
 * Simplified app wrapping
+
+## 0.0.2
+* Re-wrote README.md content
