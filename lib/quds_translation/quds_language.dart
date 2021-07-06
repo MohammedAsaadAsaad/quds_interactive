@@ -1,5 +1,6 @@
 part of 'internals.dart';
 
+/// Represents a translation to some language
 class QudsLanguage {
   _MaterialLocalizationsDelegate get materialLocalizationsDelegate =>
       const _MaterialLocalizationsDelegate();
@@ -28,6 +29,7 @@ class QudsLanguage {
   /// The dicionary of the co-words of this language
   Map<String, String> dictionary = {};
 
+  /// Get the translation mapped to [key]
   String translate(String key) {
     var result = dictionary[key.toLowerCase()];
 

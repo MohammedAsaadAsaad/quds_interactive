@@ -1,5 +1,6 @@
 part of 'internals.dart';
 
+/// Details about some language.
 abstract class QudsLanguageDetails {
   /// The language code like 'ar'
   String get langCode;

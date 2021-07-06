@@ -27,6 +27,7 @@ bool get isRTL => !isLTR;
 String translateForLang(String langCode, String key) =>
     QudsTranslation.translate(key, langCode: langCode);
 
+/// Helping extension methods on [String] for translation.
 extension StringExtensions on String {
   ///Translate to the selected language
   String get tr => translate(this);

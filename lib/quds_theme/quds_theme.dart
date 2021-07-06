@@ -18,10 +18,10 @@ class QudsTheme {
   }
 
   /// Customize the dark theme of the app
-  static ThemeData darkTheme = ThemeData.dark();
+  static ThemeData? darkTheme;
 
   /// Customize the light theme of the app
-  static ThemeData lightTheme = ThemeData.light();
+  static ThemeData? lightTheme;
 
   /// Initialize the theme control of the app
   static void initialize(

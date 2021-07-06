@@ -4,6 +4,25 @@ import '../quds_interactive.dart';
 
 /// A wrap for [MaterialApp] with ability to change language and theme dynamically
 class QudsInteractiveApp extends StatelessWidget {
+  /// Custom builder for whole app,
+  ///
+  /// for example:
+  /// ```dart
+  /// QudsInteractiveApp(
+  /// builder: (c) => MyHomePage(),
+  /// customBuilder: (c, w) => Column(
+  ///    children: [Expanded(child:w??Container()),AdMobContainer()],
+  ///  ),
+  /// );
+  /// ```
+  final Widget Function(BuildContext, Widget?)? customBuilder;
+
+  /// Set the material app title
+  final String? title;
+
+  /// To generate dynamic title
+  final String Function()? generateTitle;
+
   /// The builder function
   final Widget Function(BuildContext context)? builder;
 
@@ -13,9 +32,13 @@ class QudsInteractiveApp extends StatelessWidget {
   /// {@macro flutter.widgets.widgetsApp.debugShowCheckedModeBanner}
   final bool debugShowCheckedModeBanner;
 
+  /// Create an instance of [QudsInteractiveApp]
   const QudsInteractiveApp(
       {Key? key,
       this.builder,
+      this.title,
+      this.generateTitle,
+      this.customBuilder,
       this.customTheme,
       this.debugShowCheckedModeBanner = true})
       : super(key: key);
@@ -29,9 +52,18 @@ class QudsInteractiveApp extends StatelessWidget {
                       (pTheme == null
                           ? Theme.of(context)
                           : (pTheme.isDark.v
-                              ? QudsTheme.darkTheme
-                              : QudsTheme.lightTheme)),
+                              ? QudsTheme.darkTheme ??
+                                  ThemeData(
+                                      fontFamily: currentFont,
+                                      brightness: Brightness.dark)
+                              : QudsTheme.lightTheme ??
+                                  ThemeData(
+                                      fontFamily: currentFont,
+                                      brightness: Brightness.light))),
                   builder: (c, th) => MaterialApp(
+                      title: generateTitle != null
+                          ? generateTitle!()
+                          : this.title ?? '',
                       debugShowCheckedModeBanner: debugShowCheckedModeBanner,
                       localizationsDelegates: [
                         if (QudsTranslation.currLanguage != null)
@@ -41,8 +73,11 @@ class QudsInteractiveApp extends StatelessWidget {
                       theme: th,
                       key: key,
                       home: builder?.call(context) ?? Container(),
-                      builder: (c, w) =>
-                          QudsTranslated(langCode: p!.langCode.v, child: w!)));
+                      builder: (c, w) => QudsTranslated(
+                          langCode: p!.langCode.v,
+                          child: customBuilder == null
+                              ? w!
+                              : customBuilder!(c, w))));
             }));
 
     return QudsApp(controller: qudsAppController, child: result);
@@ -57,7 +92,10 @@ class QudsInteractiveApp extends StatelessWidget {
       bool restoreSavedPreferences = true,
       String? preferencesEncryptionKey,
       String? preferencesEncryptionIV,
-      List<QudsProvider>? additionalProviders}) async {
+      List<QudsProvider>? additionalProviders,
+      String? defaultLangCode,
+      String? defaultFont,
+      Map<String, String>? customFonts}) async {
     WidgetsFlutterBinding.ensureInitialized();
 
     qudsAppController = QudsAppController(
@@ -70,7 +108,10 @@ class QudsInteractiveApp extends StatelessWidget {
       await qudsAppController.restoreStateInSharedPreferences();
 
     QudsTranslation.initialize(supportedLanguageCodes ?? [],
-        additionalDictionaries: additionalDictionaries);
+        additionalDictionaries: additionalDictionaries,
+        defaultLangCode: defaultLangCode,
+        defaultFont: defaultFont,
+        customFonts: customFonts);
 
     QudsTheme.initialize();
   }

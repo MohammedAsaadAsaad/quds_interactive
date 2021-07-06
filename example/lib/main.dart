@@ -1,5 +1,6 @@
 import 'package:example/translations/en.dart';
 import 'package:example/ui/main_app_lang.dart';
+import 'package:example/ui/main_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_interactive/quds_interactive.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
@@ -8,8 +9,11 @@ import 'ui/translated_as_required.dart';
 
 void main() async {
   await QudsInteractiveApp.initialize(
-      supportedLanguageCodes: ['en', 'ar_ps', 'fr'],
-      additionalDictionaries: {'ar': arabicSupport, 'en': englishSupport});
+    supportedLanguageCodes: ['en', 'ar_ps', 'fr', 'es'],
+    additionalDictionaries: {'ar': arabicSupport, 'en': englishSupport},
+    customFonts: {'ar': 'Cairo'},
+    // defaultFont: 'Cairo'
+  );
 
   runApp(MyApp());
 }
@@ -35,8 +39,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: const MainDrawer(),
         appBar: AppBar(
           actions: [
+            QudsSelectThemeIconButton(),
+            QudsSelectLanguageIconButton(),
             IconButton(
                 onPressed: () => Navigator.push(
                     context,

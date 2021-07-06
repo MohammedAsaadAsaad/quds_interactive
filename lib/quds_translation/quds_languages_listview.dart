@@ -5,6 +5,7 @@ class QudsLanguagesListView extends StatefulWidget {
   /// A callback that called if a change of app theme preferences occured
   final VoidCallback? onChanged;
 
+  /// Create an instance of [QudsLanguagesListView]
   const QudsLanguagesListView({Key? key, this.onChanged}) : super(key: key);
 
   @override
@@ -57,7 +58,7 @@ class _LanguagesListViewState extends State<QudsLanguagesListView>
                                       width: 40,
                                       alignment: Alignment.center,
                                       child: Image.asset(
-                                        'assets/flags/${l.countryCode}.png',
+                                        'assets/flags/${l.countryCode?.toLowerCase()}.png',
                                         width: 30,
                                         package: 'quds_interactive',
                                       )),

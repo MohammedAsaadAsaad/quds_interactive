@@ -12,7 +12,8 @@ import '../quds_interactive.dart';
 part 'quds_language.dart';
 part 'quds_language_details.dart';
 
-part 'quds_select_language_widget.dart';
+part 'quds_select_language_listtile.dart';
+part 'quds_select_language_iconbutton.dart';
 part 'quds_languages_listview.dart';
 part 'top_level_members.dart';
 part 'quds_translated.dart';

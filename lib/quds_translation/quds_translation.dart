@@ -18,7 +18,7 @@ class QudsTranslation {
 
   static String? _deviceLocaleCode;
 
-  /// The current device locale code
+  /// Get the current device locale code
   static String? get deviceLocaleCode => _deviceLocaleCode;
 
   static void _initializeDeviceLocaleCodeUpdater() {
@@ -49,7 +49,9 @@ class QudsTranslation {
   /// as example `['ar': {'hi_message':'أهلًا بك'}]`
   static void initialize(List<String> supportedLanguageCodes,
       {Map<String, Map<String, String>>? additionalDictionaries,
-      String? defaultLangCode}) {
+      String? defaultLangCode,
+      String? defaultFont,
+      Map<String, String>? customFonts}) {
     if (_initialized) return;
     _initialized = true;
 
@@ -63,6 +65,16 @@ class QudsTranslation {
       for (var l in additionalDictionaries.entries) {
         var lang = getLanguage(l.key);
         if (lang != null) lang.mergeDictionary(l.value);
+      }
+    }
+
+    if (defaultFont != null)
+      for (var l in languages.values) l.prefferedFont = defaultFont;
+
+    if (customFonts != null) {
+      for (var l in customFonts.entries) {
+        var lang = getLanguage(l.key);
+        if (lang != null) lang.prefferedFont = l.value;
       }
     }
 
@@ -220,7 +232,7 @@ class QudsTranslation {
               padding: EdgeInsets.symmetric(vertical: 5),
               child: Text(
                 'Select language'.tr,
-                style: Theme.of(context).textTheme.headline6,
+                style: const TextStyle(fontSize: 18),
               ))),
     );
   }

@@ -8,3 +8,5 @@ part 'quds_theme_provider.dart';
 part 'quds_theme.dart';
 part 'quds_themes_listview.dart';
 part 'quds_themed_widget.dart';
+part 'quds_select_theme_listtile.dart';
+part 'quds_select_theme_iconbutton.dart';

@@ -197,21 +197,21 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.2+1"
+    version: "0.0.4+5"
   quds_provider:
     dependency: transitive
     description:
       name: quds_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.5+1"
+    version: "0.0.6+3"
   quds_ui_kit:
     dependency: transitive
     description:
       name: quds_ui_kit
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.4+5"
+    version: "0.0.7+2"
   shared_preferences:
     dependency: transitive
     description:
